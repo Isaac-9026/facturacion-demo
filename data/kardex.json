@@ -52,5 +52,23 @@
         "saldo_cantidad": 10,
         "saldo_valor": 20000,
         "cpp": 2000
+    },
+    {
+        "id": 4,
+        "producto_id": 1,
+        "almacen_id": 1,
+        "empresa_id": 1,
+        "fecha": "2026-09-17",
+        "documento": "Factura F001-000123",
+        "tipo_operacion": "VENTA",
+        "entrada_cantidad": 0,
+        "entrada_costo": 0,
+        "entrada_valor": 0,
+        "salida_cantidad": 4,
+        "salida_costo": 3500,
+        "salida_valor": 14000,
+        "saldo_cantidad": 96,
+        "saldo_valor": 336000,
+        "cpp": 3500
     }
 ]
