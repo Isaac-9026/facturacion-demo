@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prov_data['id'] = $id;
         foreach ($proveedores as $key => $p) {
             if ($p['id'] == $id) {
+                $prov_data['empresa_id'] = $p['empresa_id'] ?? 1;
                 $proveedores[$key] = $prov_data;
                 break;
             }
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($p['id']) && $p['id'] > $max_id) $max_id = $p['id'];
         }
         $prov_data['id'] = $max_id + 1;
+        $prov_data['empresa_id'] = $_SESSION['empresa_id'];
         $proveedores[] = $prov_data;
     }
     

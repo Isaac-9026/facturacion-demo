@@ -41,9 +41,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precios = $_POST['precios'];
     $descuentos = $_POST['descuentos'];
     
+    // VALIDACIÓN DE STOCK AGREGADO
+    $cantidades_agregadas = [];
     for ($i = 0; $i < count($productos); $i++) {
         $prod_id = (int)$productos[$i];
-        $cant = (int)$cantidades[$i];
+        $cant = (float)$cantidades[$i];
+        if (!isset($cantidades_agregadas[$prod_id])) {
+            $cantidades_agregadas[$prod_id] = 0;
+        }
+        $cantidades_agregadas[$prod_id] += $cant;
+    }
+    
+    foreach ($cantidades_agregadas as $p_id => $c_total) {
+        $stock_disponible = 0;
+        foreach ($inventario as $inv) {
+            if ($inv['producto_id'] == $p_id && $inv['almacen_id'] == $venta['almacen_id'] && $inv['empresa_id'] == $empresa_id) {
+                $stock_disponible = $inv['stock_actual'];
+                break;
+            }
+        }
+        if ($c_total > $stock_disponible) {
+            die("Error: Stock insuficiente para procesar la venta. El producto ID {$p_id} requiere {$c_total} pero solo hay {$stock_disponible} disponibles en el almacén seleccionado.");
+        }
+    }
+    
+    for ($i = 0; $i < count($productos); $i++) {
+        $prod_id = (int)$productos[$i];
+        $cant = (float)$cantidades[$i];
         $precio = (float)$precios[$i];
         $dscto = (float)$descuentos[$i];
         

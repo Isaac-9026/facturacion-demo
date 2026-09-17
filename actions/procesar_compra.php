@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     for ($i = 0; $i < count($productos); $i++) {
         $prod_id = (int)$productos[$i];
-        $cant = (int)$cantidades[$i];
+        $cant = (float)$cantidades[$i];
         $costo = (float)$costos[$i];
         
         // Añadir a detalle de compra

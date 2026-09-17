@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prod_data['id'] = $id;
         foreach ($productos as $key => $p) {
             if ($p['id'] == $id) {
+                // Mantener empresa_id original
+                $prod_data['empresa_id'] = $p['empresa_id'] ?? 1;
                 $productos[$key] = $prod_data;
                 break;
             }
@@ -33,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($p['id']) && $p['id'] > $max_id) $max_id = $p['id'];
         }
         $prod_data['id'] = $max_id + 1;
+        $prod_data['empresa_id'] = $_SESSION['empresa_id'];
         $productos[] = $prod_data;
     }
     

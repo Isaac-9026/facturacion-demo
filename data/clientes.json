@@ -6,15 +6,17 @@
         "nombre": "Cliente Corporativo S.A.",
         "direccion": "Av. Los Negocios 789, San Isidro",
         "telefono": "987654321",
-        "correo": "compras@clientecorporativo.com"
+        "correo": "compras@clientecorporativo.com",
+        "empresa_id": 1
     },
     {
         "id": 2,
         "tipo_documento": "DNI",
         "numero_documento": "76543210",
-        "nombre": "Juan Pérez",
+        "nombre": "Juan P\u00e9rez",
         "direccion": "Calle Las Flores 123, Miraflores",
         "telefono": "999888777",
-        "correo": "juan.perez@email.com"
+        "correo": "juan.perez@email.com",
+        "empresa_id": 1
     }
 ]

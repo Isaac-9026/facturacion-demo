@@ -4,10 +4,13 @@ require_once '../../includes/helpers.php';
 
 $productos = get_data('productos');
 $kardex_all = get_data('kardex');
+$almacenes = get_data('almacenes');
 
 $producto_id = $_GET['producto_id'] ?? null;
+$almacen_id = $_GET['almacen_id'] ?? null;
 $movimientos = [];
 $producto_seleccionado = null;
+$almacen_seleccionado = null;
 
 if ($producto_id) {
     foreach ($productos as $p) {
@@ -17,19 +20,25 @@ if ($producto_id) {
         }
     }
     
+    if ($almacen_id) {
+        foreach ($almacenes as $a) {
+            if ($a['id'] == $almacen_id) {
+                $almacen_seleccionado = $a;
+                break;
+            }
+        }
+    }
+    
     foreach ($kardex_all as $k) {
-        if ($k['producto_id'] == $producto_id && $k['empresa_id'] == $_SESSION['empresa_id']) {
+        if ($k['producto_id'] == $producto_id && $k['almacen_id'] == $almacen_id && $k['empresa_id'] == $_SESSION['empresa_id']) {
             $movimientos[] = $k;
         }
     }
     
     // Ordenar por fecha y luego por ID (para mantener el orden temporal real de inserción)
+    // Ordenar por ID (para mantener el orden temporal real de inserción)
     usort($movimientos, function($a, $b) {
-        $date_diff = strtotime($a['fecha']) - strtotime($b['fecha']);
-        if ($date_diff === 0) {
-            return $a['id'] - $b['id'];
-        }
-        return $date_diff;
+        return $a['id'] - $b['id'];
     });
 }
 ?>
@@ -46,13 +55,27 @@ if ($producto_id) {
     </div>
     <div class="card-body">
         <form action="" method="GET" class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <select name="producto_id" class="form-select" required>
                     <option value="">-- Seleccione un Producto --</option>
                     <?php foreach($productos as $p): ?>
+                        <?php if(($p['empresa_id'] ?? 1) == $_SESSION['empresa_id']): ?>
                         <option value="<?php echo $p['id']; ?>" <?php echo ($producto_id == $p['id']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($p['sku'] . ' - ' . $p['nombre']); ?>
                         </option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="almacen_id" class="form-select" required>
+                    <option value="">-- Seleccione Almacén --</option>
+                    <?php foreach($almacenes as $a): ?>
+                        <?php if(($a['empresa_id'] ?? 1) == $_SESSION['empresa_id']): ?>
+                        <option value="<?php echo $a['id']; ?>" <?php echo ($almacen_id == $a['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($a['nombre']); ?>
+                        </option>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -61,7 +84,7 @@ if ($producto_id) {
                     <i class="bi bi-search me-1"></i> Consultar
                 </button>
             </div>
-            <div class="col-md-4 text-end">
+            <div class="col-md-2 text-end">
                 <a href="<?php echo url('pages/inventario/index.php'); ?>" class="btn btn-outline-secondary">
                     Volver a Stock
                 </a>
@@ -85,7 +108,7 @@ if ($producto_id) {
     <div class="card shadow mb-4 border-top-info">
         <div class="card-header py-3 d-flex justify-content-between align-items-center bg-white">
             <h6 class="m-0 font-weight-bold text-info-emphasis">
-                Kardex: <?php echo htmlspecialchars($producto_seleccionado['nombre']); ?>
+                Kardex: <?php echo htmlspecialchars($producto_seleccionado['nombre']); ?> | Almacén: <?php echo htmlspecialchars($almacen_seleccionado['nombre'] ?? 'Desconocido'); ?>
             </h6>
             <span class="badge bg-secondary">Método: Promedio Ponderado</span>
         </div>

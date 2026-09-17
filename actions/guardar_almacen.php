@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $alm_data['id'] = $id;
         foreach ($almacenes as $key => $a) {
             if ($a['id'] == $id) {
+                $alm_data['empresa_id'] = $a['empresa_id'] ?? 1;
                 $almacenes[$key] = $alm_data;
                 break;
             }
@@ -28,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($a['id']) && $a['id'] > $max_id) $max_id = $a['id'];
         }
         $alm_data['id'] = $max_id + 1;
+        $alm_data['empresa_id'] = $_SESSION['empresa_id'];
         $almacenes[] = $alm_data;
     }
     

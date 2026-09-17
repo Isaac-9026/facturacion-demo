@@ -1,8 +1,9 @@
 [
     {
         "id": 1,
-        "nombre": "Almacén Principal",
+        "nombre": "Almac\u00e9n Principal",
         "ubicacion": "Sede Central",
-        "estado": "Activo"
+        "estado": "Activo",
+        "empresa_id": 1
     }
 ]

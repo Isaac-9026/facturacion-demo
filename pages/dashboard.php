@@ -33,7 +33,7 @@ foreach ($ventas as $v) {
         
         // Filtro mensual
         if (substr($v['fecha'], 0, 7) === $mes_actual) {
-            $total_ingresos_mes += $v['total'];
+            $total_ingresos_mes += $v['subtotal'] ?? $v['total'];
             $costo_ventas_mes += $v['costo_ventas_total'] ?? 0;
         }
     }

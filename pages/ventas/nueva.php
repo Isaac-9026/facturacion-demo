@@ -116,7 +116,7 @@ $almacenes = get_data('almacenes');
                                 <span class="badge bg-secondary lbl-stock">---</span>
                                 <input type="hidden" class="hidden-stock" value="0">
                             </td>
-                            <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="1" step="1" value="1" required></td>
+                            <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="0.01" step="any" value="1" required></td>
                             <td><input type="number" class="form-control txt-precio" name="precios[]" min="0.01" step="0.01" value="0.00" required></td>
                             <td><input type="number" class="form-control txt-dscto" name="descuentos[]" min="0" max="100" step="1" value="0"></td>
                             <td><input type="text" class="form-control txt-subtotal" readonly value="0.00"></td>
@@ -170,7 +170,7 @@ $almacenes = get_data('almacenes');
             <span class="badge bg-secondary lbl-stock">---</span>
             <input type="hidden" class="hidden-stock" value="0">
         </td>
-        <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="1" step="1" value="1" required></td>
+        <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="0.01" step="any" value="1" required></td>
         <td><input type="number" class="form-control txt-precio" name="precios[]" min="0.01" step="0.01" value="0.00" required></td>
         <td><input type="number" class="form-control txt-dscto" name="descuentos[]" min="0" max="100" step="1" value="0"></td>
         <td><input type="text" class="form-control txt-subtotal" readonly value="0.00"></td>

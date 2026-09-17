@@ -6,6 +6,7 @@
         "nombre": "Distribuidora Tech SAC",
         "direccion": "Zona Industrial Mza A Lote 1, Callao",
         "telefono": "01-555-1234",
-        "correo": "ventas@distribuidoratech.pe"
+        "correo": "ventas@distribuidoratech.pe",
+        "empresa_id": 1
     }
 ]

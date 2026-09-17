@@ -8,7 +8,8 @@
         "categoria": "Equipos",
         "marca": "TechBrand",
         "stock_minimo": 5,
-        "estado": "Activo"
+        "estado": "Activo",
+        "empresa_id": 1
     },
     {
         "id": 2,
@@ -16,9 +17,10 @@
         "nombre": "Monitor 24\"",
         "descripcion": "Monitor LED Full HD",
         "unidad_medida": "UN",
-        "categoria": "Periféricos",
+        "categoria": "Perif\u00e9ricos",
         "marca": "ViewScreen",
         "stock_minimo": 10,
-        "estado": "Activo"
+        "estado": "Activo",
+        "empresa_id": 1
     }
 ]

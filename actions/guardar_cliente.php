@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cliente_data['id'] = $id;
         foreach ($clientes as $key => $c) {
             if ($c['id'] == $id) {
+                $cliente_data['empresa_id'] = $c['empresa_id'] ?? 1;
                 $clientes[$key] = $cliente_data;
                 break;
             }
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($c['id']) && $c['id'] > $max_id) $max_id = $c['id'];
         }
         $cliente_data['id'] = $max_id + 1;
+        $cliente_data['empresa_id'] = $_SESSION['empresa_id'];
         $clientes[] = $cliente_data;
     }
     
