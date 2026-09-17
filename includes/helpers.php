@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // includes/helpers.php
 
 function url($path = '') {
@@ -24,3 +24,9 @@ function get_empresa_activa() {
         'nombre' => $_SESSION['empresa_nombre'] ?? 'Sin empresa'
     ];
 }
+
+function save_data($jsonFile, $data) {
+    $path = DATA_PATH . $jsonFile . '.json';
+    return file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
