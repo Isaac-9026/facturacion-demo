@@ -66,6 +66,9 @@ $getCliente = function($id) use ($clientes) {
                                     <a href="<?php echo url('pages/ventas/detalle.php?id=' . $venta['id']); ?>" class="btn btn-sm btn-outline-info" title="Ver Detalle e Impacto">
                                         <i class="bi bi-eye"></i>
                                     </a>
+                                    <a href="<?php echo url('pages/ventas/documento.php?id=' . $venta['id']); ?>" target="_blank" class="btn btn-sm btn-outline-secondary" title="Imprimir Factura">
+                                        <i class="bi bi-printer"></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

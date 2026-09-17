@@ -153,6 +153,9 @@ $getProdName = function($pid) use ($productos) {
 </div>
 
 <div class="text-center mt-4">
+    <a href="<?php echo url('pages/ventas/documento.php?id=' . $venta['id']); ?>" target="_blank" class="btn btn-secondary btn-lg me-2">
+        <i class="bi bi-printer"></i> Ver Documento Impreso
+    </a>
     <a href="<?php echo url('pages/inventario/index.php'); ?>" class="btn btn-primary btn-lg">
         Ir a Verificar Inventario <i class="bi bi-arrow-right"></i>
     </a>
