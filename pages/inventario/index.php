@@ -42,6 +42,7 @@ $inventario_actual = array_filter($inventario, function($inv) {
                         <th class="text-center">Stock Actual</th>
                         <th class="text-end">Costo Promedio (CPP)</th>
                         <th class="text-end">Valor Total</th>
+                        <th width="100" class="text-center">Kardex</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +69,11 @@ $inventario_actual = array_filter($inventario, function($inv) {
                                 </td>
                                 <td class="text-end fw-bold">
                                     <?php echo format_money($inv['valor_inventario']); ?>
+                                </td>
+                                <td class="text-center">
+                                    <a href="<?php echo url('pages/inventario/kardex.php?producto_id=' . $prod['id']); ?>" class="btn btn-sm btn-outline-info" title="Ver Movimientos">
+                                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

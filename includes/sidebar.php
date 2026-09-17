@@ -45,7 +45,7 @@
         
         <!-- KARDEX -->
         <div class="px-3 text-uppercase text-muted fw-bold mb-1 mt-3" style="font-size: 0.75rem;">Kardex</div>
-        <a href="<?php echo url('pages/kardex/index.php'); ?>" class="list-group-item list-group-item-action bg-dark text-white border-0 py-2">
+        <a href="<?php echo url('pages/inventario/kardex.php'); ?>" class="list-group-item list-group-item-action bg-dark text-white border-0 py-2">
             <i class="bi bi-file-earmark-spreadsheet me-2 text-info"></i> Kardex Valorizado
         </a>
         <a href="<?php echo url('pages/kardex/importacion.php'); ?>" class="list-group-item list-group-item-action bg-dark text-white border-0 py-2">

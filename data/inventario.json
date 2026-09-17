@@ -3,9 +3,9 @@
         "producto_id": 1,
         "almacen_id": 1,
         "empresa_id": 1,
-        "stock_actual": 96,
+        "stock_actual": 97,
         "cpp": 3500,
-        "valor_inventario": 336000
+        "valor_inventario": 339500
     },
     {
         "producto_id": 2,
