@@ -1,0 +1,18 @@
+[
+    {
+        "producto_id": 1,
+        "almacen_id": 1,
+        "empresa_id": 1,
+        "stock_actual": 100,
+        "cpp": 3500.00,
+        "valor_inventario": 350000.00
+    },
+    {
+        "producto_id": 2,
+        "almacen_id": 1,
+        "empresa_id": 1,
+        "stock_actual": 50,
+        "cpp": 450.00,
+        "valor_inventario": 22500.00
+    }
+]

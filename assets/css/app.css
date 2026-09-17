@@ -1,0 +1,57 @@
+/* Estilos base del sistema */
+body {
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar Wrapper */
+#wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    transition: margin 0.25s ease-out;
+}
+
+.sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
+
+/* Menú lateral activo */
+.list-group-item.active {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+}
+
+/* Toggle del Sidebar */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: -250px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Cards de Dashboard */
+.card-stats {
+    transition: transform 0.2s;
+}
+.card-stats:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+/* Utilidades */
+.text-bg-warning-light {
+    background-color: #fff3cd;
+    color: #856404;
+}
