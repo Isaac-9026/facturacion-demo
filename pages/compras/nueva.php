@@ -1,6 +1,7 @@
 <?php
 require_once '../../config.php';
 require_once '../../includes/helpers.php';
+require_once '../../includes/quantities.php';
 
 $proveedores = get_data('proveedores');
 $productos = get_data('productos');
@@ -15,7 +16,9 @@ $almacenes = get_data('almacenes');
     </a>
 </div>
 
-<form action="<?php echo url('actions/procesar_compra.php'); ?>" method="POST" id="formCompra">
+<form action="<?php echo url('actions/procesar_compra.php'); ?>" method="POST" id="formCompra" data-stock-url="<?php echo url('actions/api_stock.php'); ?>">
+    <?php echo form_context(); ?>
+    <div class="alert alert-danger d-none form-errors" role="alert"></div>
     
     <!-- Cabecera de la Compra -->
     <div class="card shadow mb-4 border-left-success">
@@ -32,6 +35,7 @@ $almacenes = get_data('almacenes');
                             <option value="<?php echo $p['id']; ?>"><?php echo htmlspecialchars($p['nombre'] . ' (' . $p['numero_documento'] . ')'); ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <a class="btn btn-sm btn-outline-primary mt-2" data-select-target="proveedor_id" href="<?php echo url('pages/proveedores/form.php'); ?>">Agregar proveedor</a>
                 </div>
                 <div class="col-md-2">
                     <label class="form-label">Tipo Doc. <span class="text-danger">*</span></label>
@@ -94,11 +98,11 @@ $almacenes = get_data('almacenes');
                                 <select class="form-select producto-select" name="productos[]" required>
                                     <option value="">Seleccionar...</option>
                                     <?php foreach($productos as $prod): ?>
-                                        <option value="<?php echo $prod['id']; ?>"><?php echo htmlspecialchars($prod['sku'] . ' - ' . $prod['nombre']); ?></option>
+                                        <option data-unit="<?php echo htmlspecialchars($prod['unidad_medida'] ?? 'UN'); ?>" data-step="<?php echo quantity_step($prod['unidad_medida'] ?? 'UN'); ?>" value="<?php echo $prod['id']; ?>"><?php echo htmlspecialchars($prod['sku'] . ' - ' . $prod['nombre']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
-                            <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="0.01" step="any" value="1" required></td>
+                            <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="1" step="1" value="1" required></td>
                             <td><input type="number" class="form-control txt-costo" name="costos[]" min="0.01" step="0.01" value="0.00" required></td>
                             <td><input type="number" class="form-control txt-dscto" name="descuentos[]" min="0" max="100" step="1" value="0"></td>
                             <td><input type="text" class="form-control txt-subtotal" readonly value="0.00"></td>
@@ -144,11 +148,11 @@ $almacenes = get_data('almacenes');
             <select class="form-select producto-select" name="productos[]" required>
                 <option value="">Seleccionar...</option>
                 <?php foreach($productos as $prod): ?>
-                    <option value="<?php echo $prod['id']; ?>"><?php echo htmlspecialchars($prod['sku'] . ' - ' . $prod['nombre']); ?></option>
+                    <option data-unit="<?php echo htmlspecialchars($prod['unidad_medida'] ?? 'UN'); ?>" data-step="<?php echo quantity_step($prod['unidad_medida'] ?? 'UN'); ?>" value="<?php echo $prod['id']; ?>"><?php echo htmlspecialchars($prod['sku'] . ' - ' . $prod['nombre']); ?></option>
                 <?php endforeach; ?>
             </select>
         </td>
-        <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="0.01" step="any" value="1" required></td>
+        <td><input type="number" class="form-control txt-cantidad" name="cantidades[]" min="1" step="1" value="1" required></td>
         <td><input type="number" class="form-control txt-costo" name="costos[]" min="0.01" step="0.01" value="0.00" required></td>
         <td><input type="number" class="form-control txt-dscto" name="descuentos[]" min="0" max="100" step="1" value="0"></td>
         <td><input type="text" class="form-control txt-subtotal" readonly value="0.00"></td>
@@ -175,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let subtotalFila = bruto - descuentoMoneda;
             
             fila.querySelector('.txt-subtotal').value = subtotalFila.toFixed(2);
-            subtotalGlobal += subtotalFila;
+            subtotalGlobal += Number(subtotalFila.toFixed(2));
         });
         
         const igv = subtotalGlobal * 0.18;
@@ -215,4 +219,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script src="<?php echo url('assets/js/quantities.js'); ?>" defer></script>
 <?php include '../../includes/footer.php'; ?>

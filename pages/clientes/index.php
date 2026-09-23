@@ -2,10 +2,7 @@
 require_once '../../config.php';
 require_once '../../includes/helpers.php';
 
-$empresa_id = $_SESSION['empresa_id'];
-$clientes = array_filter(get_data('clientes'), function($p) use ($empresa_id) {
-    return ($p['empresa_id'] ?? 1) == $empresa_id;
-});
+$clientes = get_data('clientes');
 ?>
 <?php include '../../includes/header.php'; ?>
 
